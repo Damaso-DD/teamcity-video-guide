@@ -1,5 +1,6 @@
 import sys
 import time
+import random
 from unittest.mock import patch, mock_open
 from datetime import datetime
 
@@ -84,13 +85,26 @@ def test_main_success(mock_get_weather, mock_file, mock_makedirs, monkeypatch, c
     assert f"Successfully wrote weather data to {expected_filename}" in captured.out
 
 
-def test_simulate_slow_build():
+#def test_simulate_slow_build():
+#    """
+#    This test intentionally slows down the build for demonstration purposes.
+#    It waits for 3 minutes (180 seconds).
+#    To disable, comment out this function or use pytest markers.
+#    """
+#    print("\nSimulating a slow test for 3 minutes...")
+#    time.sleep(180)
+#    print("Slow test simulation finished.")
+#    assert True
+
+
+def test_simulate_flaky_test():
     """
-    This test intentionally slows down the build for demonstration purposes.
-    It waits for 3 minutes (180 seconds).
-    To disable, comment out this function or use pytest markers.
+    This test intentionally fails ~25% of the time to simulate a flaky test.
     """
-    print("\nSimulating a slow test for 3 minutes...")
-    time.sleep(180)
-    print("Slow test simulation finished.")
-    assert True
+    print("\nSimulating a flaky test...")
+    if random.randint(1, 4) == 1:
+        print("Flaky test is FAILING this time.")
+        assert False, "This test failed intentionally to simulate flakiness."
+    else:
+        print("Flaky test is PASSING this time.")
+        assert True
