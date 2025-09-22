@@ -97,14 +97,14 @@ def test_main_success(mock_get_weather, mock_file, mock_makedirs, monkeypatch, c
 #    assert True
 
 
-def test_simulate_flaky_test():
-    """
-    This test intentionally fails ~25% of the time to simulate a flaky test.
-    """
-    print("\nSimulating a flaky test...")
-    if random.randint(1, 4) == 1:
-        print("Flaky test is FAILING this time.")
-        assert False, "This test failed intentionally to simulate flakiness."
-    else:
-        print("Flaky test is PASSING this time.")
-        assert True
+#def test_simulate_flaky_test():
+#    """
+#    This test intentionally fails ~25% of the time to simulate a flaky test.
+#    """
+#    print("\nSimulating a flaky test...")
+#    if random.randint(1, 4) == 1:
+#        print("Flaky test is FAILING this time.")
+#        assert False, "This test failed intentionally to simulate flakiness."
+#    else:
+#        print("Flaky test is PASSING this time.")
+#        assert True
