@@ -1,4 +1,5 @@
 import sys
+import time
 from unittest.mock import patch, mock_open
 from datetime import datetime
 
@@ -81,3 +82,15 @@ def test_main_success(mock_get_weather, mock_file, mock_makedirs, monkeypatch, c
     # 4. Check that the success message was printed
     captured = capsys.readouterr()
     assert f"Successfully wrote weather data to {expected_filename}" in captured.out
+
+
+def test_simulate_slow_build():
+    """
+    This test intentionally slows down the build for demonstration purposes.
+    It waits for 3 minutes (180 seconds).
+    To disable, comment out this function or use pytest markers.
+    """
+    print("\nSimulating a slow test for 3 minutes...")
+    time.sleep(180)
+    print("Slow test simulation finished.")
+    assert True
