@@ -14,7 +14,10 @@ def main():
         "--city", type=str, required=True, help="The city name."
     )
     parser.add_argument(
-        "--country", type=str, required=True, help="The two-letter country code."
+        "--country",
+        type=str,
+        required=True,
+        help="The two-letter country code."
     )
     args = parser.parse_args()
 
