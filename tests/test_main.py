@@ -9,6 +9,24 @@ from tests.test_core import SUCCESSFUL_RESPONSE
 
 
 @patch("weather_app.main.get_weather_data")
+@patch("builtins.open")
+def test_main_io_error(mock_open, mock_get_weather, monkeypatch, capsys):
+    """Test the main function when a file writing error occurs."""
+    # Simulate a successful API call
+    mock_get_weather.return_value = SUCCESSFUL_RESPONSE
+    monkeypatch.setattr(sys, 'argv', ['main.py', '--city', 'London', '--country', 'GB'])
+
+    # Configure the mock for open() to raise an IOError
+    mock_open.side_effect = IOError("Permission denied")
+
+    main()
+
+    # Verify that the correct error message was printed to the console
+    captured = capsys.readouterr()
+    assert "Error writing to file: Permission denied" in captured.out
+
+
+@patch("weather_app.main.get_weather_data")
 def test_main_api_failure(mock_get_weather, monkeypatch, capsys):
     """Test the main function when the API call fails."""
     # Simulate providing command-line arguments

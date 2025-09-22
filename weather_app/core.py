@@ -8,7 +8,6 @@ load_dotenv()
 API_BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 
-
 def get_weather_data(city, country_code):
     """Fetches weather data from the OpenWeatherMap API."""
     api_key = os.getenv("OPENWEATHER_API_KEY")

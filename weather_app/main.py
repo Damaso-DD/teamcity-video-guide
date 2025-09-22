@@ -5,7 +5,6 @@ from datetime import datetime
 from weather_app.core import get_weather_data
 
 
-
 def main():
     """Main function to run the weather CLI tool."""
     parser = argparse.ArgumentParser(
