@@ -4,11 +4,19 @@ import os
 from datetime import datetime
 from weather_app.core import get_weather_data
 
+
+
 def main():
     """Main function to run the weather CLI tool."""
-    parser = argparse.ArgumentParser(description="Get current weather data for a city.")
-    parser.add_argument("--city", type=str, required=True, help="The city name.")
-    parser.add_argument("--country", type=str, required=True, help="The two-letter country code.")
+    parser = argparse.ArgumentParser(
+        description="Get current weather data for a city."
+    )
+    parser.add_argument(
+        "--city", type=str, required=True, help="The city name."
+    )
+    parser.add_argument(
+        "--country", type=str, required=True, help="The two-letter country code."
+    )
     args = parser.parse_args()
 
     city = args.city
@@ -35,8 +43,12 @@ def main():
         output_dir = "artifacts"
         os.makedirs(output_dir, exist_ok=True)
 
-        # Generate a unique filename within the artifacts directory
-        filename = os.path.join(output_dir, f"weather_{city.lower().replace(' ', '_')}_{datetime.now().strftime('%Y%m%d%H%M%S')}.csv")
+        # Generate a unique filename
+        file_timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+        city_slug = city.lower().replace(' ', '_')
+        filename = os.path.join(
+            output_dir, f"weather_{city_slug}_{file_timestamp}.csv"
+        )
 
         # Write to CSV
         try:
@@ -46,12 +58,16 @@ def main():
 
                 writer.writeheader()
                 writer.writerow(output_data)
-            
+
             print(f"Successfully wrote weather data to {filename}")
         except IOError as e:
             print(f"Error writing to file: {e}")
     else:
-        print("Could not retrieve weather data. Please check your inputs and API key.")
+        print(
+            "Could not retrieve weather data. "
+            "Please check your inputs and API key."
+        )
+
 
 if __name__ == "__main__":
     main()
